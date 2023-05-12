@@ -1,12 +1,5 @@
 {
-  "extends": [
-    "airbnb/hooks",
-    "airbnb-typescript",
-    "react-app",
-    "react-app/jest",
-    "prettier",
-    "prettier/prettier"
-  ],
+  "extends": ["airbnb", "airbnb-typescript", "prettier", "prettier/prettier"],
   "parserOptions": {
     "project": "./tsconfig.json"
   },
@@ -17,8 +10,11 @@
     "react/require-default-props": [0],
     "import/no-extraneous-dependencies": "off",
     "import/extensions": "off",
-    "react/function-component-definition": [2, {
-      "namedComponents": ["function-declaration", "function-expression", "arrow-function"]
-    }]
+    "react/function-component-definition": [
+      2,
+      {
+        "namedComponents": ["function-declaration", "function-expression", "arrow-function"]
+      }
+    ]
   }
 }
