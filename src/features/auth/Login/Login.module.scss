@@ -1,0 +1,22 @@
+@import 'common/styles/varaibles.scss';
+
+.formDesc {
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.formLink {
+  font-weight: 600;
+  color: $textColor;
+}
+
+.error {
+  color: $errorColor;
+  position: absolute;
+  bottom: -12px;
+  left: 0;
+}
+
+.formField {
+  position: relative;
+}

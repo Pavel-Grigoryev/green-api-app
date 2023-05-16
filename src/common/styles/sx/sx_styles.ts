@@ -22,6 +22,13 @@ export const formControllLoginSX = {
   width: '80%',
 };
 
+export const formGroupSX = {
+  rowGap: '20px',
+};
+
+export const formButtonSX = {
+  marginTop: '12px',
+};
 export const HeaderAppBarSX = {
   height: 130,
   zIndex: 80,

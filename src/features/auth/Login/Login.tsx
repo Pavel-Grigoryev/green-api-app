@@ -11,9 +11,10 @@ import { Navigate } from 'react-router-dom';
 import { SmallContainer } from 'common/components/SmallContainer/SmallContainer';
 import { useAppSelector } from 'common/hooks/useAppSelector';
 import { PATH } from 'common/constants/routes';
+import { useActions } from 'common/hooks/useActions';
+import { formButtonSX, formControllLoginSX, formGroupSX } from 'common/styles/sx/sx_styles';
 import { authAction, authSelectors } from '../index';
-import { useActions } from '../../../common/hooks/useActions';
-import { formControllLoginSX } from '../../../common/styles/sx/sx_styles';
+import s from './Login.module.scss';
 
 export const Login = () => {
   const isLoggedIn = useAppSelector(authSelectors.selectIsLoggedIn);
@@ -44,30 +45,46 @@ export const Login = () => {
         <Grid item xs={12} justifyContent="center">
           <FormControl sx={formControllLoginSX}>
             <FormLabel>
-              <p>
+              <p className={s.formDesc}>
                 To log in get registered
-                <a href="https://green-api.com/auth/" target="_blank" rel="noreferrer">
+                <a
+                  className={s.formLink}
+                  href="https://green-api.com/auth/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   {' '}
                   here
                 </a>
               </p>
             </FormLabel>
             <form onSubmit={formik.handleSubmit}>
-              <FormGroup>
-                <TextField label="Id" margin="normal" {...formik.getFieldProps('id')} />
-                {formik.touched.id && formik.errors.id && (
-                  <div style={{ color: 'red' }}>{formik.errors.id}</div>
-                )}
-                <TextField
-                  type="password"
-                  label="Api Token"
-                  margin="normal"
-                  {...formik.getFieldProps('apiToken')}
-                />
-                {formik.touched.apiToken && formik.errors.apiToken && (
-                  <div style={{ color: 'red' }}>{formik.errors.apiToken}</div>
-                )}
-                <Button type="submit" variant="contained" color="primary">
+              <FormGroup sx={formGroupSX}>
+                <div className={s.formField}>
+                  <TextField label="Id" margin="normal" fullWidth {...formik.getFieldProps('id')} />
+                  {formik.touched.id && formik.errors.id && (
+                    <div className={s.error}>{formik.errors.id}</div>
+                  )}
+                </div>
+                <div className={s.formField}>
+                  <TextField
+                    type="password"
+                    label="Api Token"
+                    margin="normal"
+                    fullWidth
+                    {...formik.getFieldProps('apiToken')}
+                  />
+                  {formik.touched.apiToken && formik.errors.apiToken && (
+                    <div className={s.error}>{formik.errors.apiToken}</div>
+                  )}
+                </div>
+                <Button
+                  sx={formButtonSX}
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  size="large"
+                >
                   Login
                 </Button>
               </FormGroup>

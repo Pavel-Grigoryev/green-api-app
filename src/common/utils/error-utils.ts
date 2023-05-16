@@ -1,4 +1,5 @@
 import axios, { AxiosError } from 'axios';
+import { appActions } from 'app';
 
 export const handleAsyncServerNetworkError = (
   err: Error | AxiosError,
@@ -7,8 +8,7 @@ export const handleAsyncServerNetworkError = (
 ) => {
   if (axios.isAxiosError<AxiosError<{ message: string }>>(err)) {
     if (showError) {
-      const error = err.response?.data ? err.response.data.message : err.message;
-      // thunkAPI.dispatch(setAppErrorAC({error}));
+      thunkAPI.dispatch(appActions.setAppErrorAC(err.message));
     }
     //  thunkAPI.dispatch(setAppStatusAC({status: "failed"}));
   }
