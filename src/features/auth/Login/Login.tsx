@@ -7,9 +7,19 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { SmallContainer } from '../../components/SmallContainer/SmallContainer';
+import { Navigate } from 'react-router-dom';
+import { SmallContainer } from 'common/components/SmallContainer/SmallContainer';
+import { useAppSelector } from 'common/hooks/useAppSelector';
+import { PATH } from 'common/constants/routes';
+import { authAction, authSelectors } from '../index';
+import { useActions } from '../../../common/hooks/useActions';
+import { formControllLoginSX } from '../../../common/styles/sx/sx_styles';
 
 export const Login = () => {
+  const isLoggedIn = useAppSelector(authSelectors.selectIsLoggedIn);
+
+  const { setAuthInitializedAC } = useActions(authAction);
+
   const formik = useFormik({
     initialValues: {
       id: '',
@@ -19,19 +29,20 @@ export const Login = () => {
       id: Yup.number().typeError('Must be a number').required('Required'),
       apiToken: Yup.string().required('Required'),
     }),
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: (data) => {
+      setAuthInitializedAC(data);
     },
   });
 
-  /* if (isLoggedIn) {
-    return <Navigate to="/" />;
-  } */
+  if (isLoggedIn) {
+    return <Navigate to={PATH.MESSENGER} />;
+  }
+
   return (
     <SmallContainer>
       <Grid container justifyContent="center">
-        <Grid item justifyContent="center">
-          <FormControl>
+        <Grid item xs={12} justifyContent="center">
+          <FormControl sx={formControllLoginSX}>
             <FormLabel>
               <p>
                 To log in get registered
@@ -66,4 +77,11 @@ export const Login = () => {
       </Grid>
     </SmallContainer>
   );
+};
+
+// Types
+
+export type FormDataType = {
+  id: string;
+  apiToken: string;
 };

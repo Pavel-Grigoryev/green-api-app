@@ -16,6 +16,7 @@
         "namedComponents": ["function-declaration", "function-expression", "arrow-function"]
       }
     ],
-    "react/jsx-props-no-spreading": "off"
+    "react/jsx-props-no-spreading": "off",
+    "no-param-reassign": ["error", { "props": false }]
   }
 }

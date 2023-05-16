@@ -9,6 +9,6 @@ export type AppRootStateType = ReturnType<RootReducerType>;
 
 export type AppDispatchType = ThunkDispatch<AppRootStateType, unknown, AnyAction>;
 
-// export type ThunkErrorType = {
-//     rejectValue: { errors: Array<string>, fieldsErrors?: Array<FieldErrorType> }
-// }
+export type ThunkErrorType = {
+  rejectValue: { errors: string };
+};

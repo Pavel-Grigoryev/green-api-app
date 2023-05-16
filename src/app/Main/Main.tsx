@@ -1,11 +1,11 @@
 import React from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
+import { Login } from 'features/auth/Login';
+import { Messenger } from 'features/messenger/Messenger';
+import { PATH } from 'common/constants/routes';
 import s from './Main.module.scss';
-import { Messenger } from '../../features/Messenger/Messenger';
-import { Login } from '../../features/Login/Login';
-import { PATH } from '../../common/routes/routes';
 
-const Main = () => {
+export const Main = () => {
   return (
     <main className={s.main}>
       <Routes>
@@ -17,5 +17,3 @@ const Main = () => {
     </main>
   );
 };
-
-export default Main;
