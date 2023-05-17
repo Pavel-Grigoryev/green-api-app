@@ -1,6 +1,7 @@
 {
   "name": "my-app",
   "version": "0.1.0",
+  "homepage": "https://Pavel-Grigoryev.github.io/green-api-app",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.0",
@@ -37,7 +38,9 @@
     "eject": "react-scripts eject",
     "lint": "eslint . --fix",
     "format": "prettier . --write",
-    "fix-code": "yarn lint && yarn format "
+    "fix-code": "yarn lint && yarn format ",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -70,6 +73,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "gh-pages": "^5.0.0",
     "node-sass": "^8.0.0",
     "prettier": "^2.8.8"
   }
