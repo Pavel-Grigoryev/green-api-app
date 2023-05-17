@@ -2,11 +2,11 @@ import React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Typography from '@mui/material/Typography';
 import Toolbar from '@mui/material/Toolbar';
-import { HeaderAppBarSX } from '../../common/styles/sx/sx_styles';
+import { headerAppBarSX } from '../../common/styles/sx/sx_styles';
 
 export const Header = () => {
   return (
-    <AppBar position="fixed" sx={HeaderAppBarSX}>
+    <AppBar position="fixed" sx={headerAppBarSX}>
       <Toolbar variant="dense" sx={{ justifyContent: 'center' }}>
         <Typography variant="h6" color="inherit" component="div">
           Green Api App

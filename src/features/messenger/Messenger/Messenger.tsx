@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Container } from '@mui/material';
 import Grid from '@mui/material/Grid';
-import { mainContainerSX } from 'common/styles/sx/sx_styles';
+import { mainContainerSX, messengerGridRightSX, messengerGridSX } from 'common/styles/sx/sx_styles';
 import { PATH } from 'common/constants/routes';
 import { Navigate } from 'react-router-dom';
 import { useAppSelector } from 'common/hooks/useAppSelector';
 import { authSelectors } from '../../auth';
+import { Chatlist } from './Chatlist';
+import { ChatMessages } from './ChatMessages';
 
 export const Messenger = () => {
   const isLoggedIn = useAppSelector(authSelectors.selectIsLoggedIn);
@@ -14,16 +16,17 @@ export const Messenger = () => {
     return <Navigate to={PATH.LOGIN} />;
   }
 
+  const [currentChatNumber, setcurrentChatNumber] = useState('');
+
   return (
     <Container color="secondary" sx={mainContainerSX}>
-      Messeger
-      <Grid
-        container
-        spacing={2}
-        style={{ marginTop: 120, justifyContent: 'space-between', flexWrap: 'wrap' }}
-      >
-        <Grid item xs={4} />
-        <Grid item xs={7} />
+      <Grid container spacing={2} sx={messengerGridSX}>
+        <Grid item xs={4}>
+          <Chatlist changeCurrentChatId={setcurrentChatNumber} />
+        </Grid>
+        <Grid item xs={8} sx={messengerGridRightSX}>
+          <ChatMessages currentChatNumber={currentChatNumber} />
+        </Grid>
       </Grid>
     </Container>
   );

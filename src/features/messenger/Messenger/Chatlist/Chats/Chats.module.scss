@@ -1,0 +1,26 @@
+@import 'common/styles/varaibles.scss';
+
+.chatsContainer {
+  background-color: $fifthColor;
+  height: 77vh;
+  overflow-y: scroll;
+}
+
+.chat {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid $fourthColor;
+  padding: 13px;
+  transition: background-color 0.3s ease-in;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $secodaryColor;
+  }
+}
+
+.chatUserImg {
+  width: 49px;
+  height: 49px;
+  margin-right: 13px;
+}

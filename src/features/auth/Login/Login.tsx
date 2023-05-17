@@ -13,13 +13,13 @@ import { useAppSelector } from 'common/hooks/useAppSelector';
 import { PATH } from 'common/constants/routes';
 import { useActions } from 'common/hooks/useActions';
 import { formButtonSX, formControllLoginSX, formGroupSX } from 'common/styles/sx/sx_styles';
-import { authAction, authSelectors } from '../index';
+import { authActions, authSelectors } from 'features/auth/index';
 import s from './Login.module.scss';
 
 export const Login = () => {
   const isLoggedIn = useAppSelector(authSelectors.selectIsLoggedIn);
 
-  const { setAuthInitializedAC } = useActions(authAction);
+  const { setAuthInitializedAC } = useActions(authActions);
 
   const formik = useFormik({
     initialValues: {

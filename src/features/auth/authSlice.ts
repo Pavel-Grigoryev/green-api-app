@@ -3,12 +3,23 @@ import { AxiosError } from 'axios';
 import { AppRootStateType, ThunkErrorType } from 'common/utils/types';
 import { handleAsyncServerNetworkError } from 'common/utils/error-utils';
 import { appActions } from 'app';
-import { authApi, AuthDataType, AuthResponseType } from './authApi';
+import { authApi, AuthDataType, AccStatusRespType, AccSetRespType } from './authApi';
 import { FormDataType } from './Login/Login';
 
 // thunks
-
-export const loginTC = createAsyncThunk<AuthResponseType, undefined, ThunkErrorType>(
+export const userSettingsTC = createAsyncThunk<AccSetRespType, AuthDataType, ThunkErrorType>(
+  'auth/userSettingsTC',
+  async (param, thunkAPI) => {
+    try {
+      const res = await authApi.getAccountSettings(param);
+      return res.data;
+    } catch (error) {
+      const err = error as Error | AxiosError;
+      return handleAsyncServerNetworkError(err, thunkAPI);
+    }
+  }
+);
+export const loginTC = createAsyncThunk<AccStatusRespType, undefined, ThunkErrorType>(
   'auth/loginTC',
   async (param, thunkAPI) => {
     const state = thunkAPI.getState() as AppRootStateType;
@@ -17,7 +28,8 @@ export const loginTC = createAsyncThunk<AuthResponseType, undefined, ThunkErrorT
       apiToken: state.auth.apiToken,
     };
     try {
-      const res = await authApi.login(date);
+      const res = await authApi.getAccountStatus(date);
+      thunkAPI.dispatch(userSettingsTC(date));
       return res.data;
     } catch (error) {
       const err = error as Error | AxiosError;
@@ -34,6 +46,7 @@ export const slice = createSlice({
     isLoggedIn: false,
     id: '',
     apiToken: '',
+    whatsAppId: '',
   },
   reducers: {
     setAuthInitializedAC(state, action: PayloadAction<FormDataType>) {
@@ -42,12 +55,18 @@ export const slice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(loginTC.fulfilled, (state) => {
-      state.isLoggedIn = true;
-    });
+    builder
+      .addCase(loginTC.fulfilled, (state) => {
+        state.isLoggedIn = true;
+      })
+      .addCase(userSettingsTC.fulfilled, (state, action) => {
+        state.whatsAppId = action.payload.wid;
+      });
   },
 });
 
 export const asyncAuthActions = { loginTC };
 
 // types
+
+export type AuthState = ReturnType<typeof slice.getInitialState>;

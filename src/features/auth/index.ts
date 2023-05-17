@@ -4,9 +4,9 @@ import * as authSelectors from './auth-selectors';
 const authReducer = slice.reducer;
 const action = slice.actions;
 
-const authAction = {
+const authActions = {
   ...asyncAuthActions,
   ...action,
 };
 
-export { authReducer, authAction, authSelectors };
+export { authReducer, authActions, authSelectors };

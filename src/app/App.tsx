@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
-import { authAction, authSelectors } from 'features/auth';
+import { authActions, authSelectors } from 'features/auth';
 import { useAppSelector } from 'common/hooks/useAppSelector';
 import { useActions } from 'common/hooks/useActions';
 import { ErrorSnackbar } from 'common/components/ErrorSnackbar';
 import s from './App.module.scss';
 import { Header } from './Header';
 import { Main } from './Main';
-import { appSelectors } from './index';
+import { appActions, appSelectors } from './index';
 
 function App() {
   const IsLoggedIn = useAppSelector(authSelectors.selectIsLoggedIn);
@@ -15,11 +15,13 @@ function App() {
   const apiToken = useAppSelector(authSelectors.selectApiToken);
   const isInitialized = useAppSelector(appSelectors.selectIsInitialized);
 
-  const { loginTC } = useActions(authAction);
-
+  const { loginTC } = useActions(authActions);
+  const { setAppInitializedAC } = useActions(appActions);
   useEffect(() => {
     if (!IsLoggedIn) {
       loginTC();
+    } else {
+      setAppInitializedAC(true);
     }
   }, [id, apiToken]);
 

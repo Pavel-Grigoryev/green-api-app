@@ -1,0 +1,15 @@
+@import 'common/styles/varaibles.scss';
+
+.formBlock {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.error {
+  position: absolute;
+  font-size: 12px;
+  top: 40px;
+  left: 14px;
+  color: $errorColor;
+}
