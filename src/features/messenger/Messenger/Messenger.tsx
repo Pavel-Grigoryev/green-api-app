@@ -5,7 +5,7 @@ import { mainContainerSX, messengerGridRightSX, messengerGridSX } from 'common/s
 import { PATH } from 'common/constants/routes';
 import { Navigate } from 'react-router-dom';
 import { useAppSelector } from 'common/hooks/useAppSelector';
-import { authSelectors } from '../../auth';
+import { authSelectors } from 'features/auth/index';
 import { Chatlist } from './Chatlist';
 import { ChatMessages } from './ChatMessages';
 

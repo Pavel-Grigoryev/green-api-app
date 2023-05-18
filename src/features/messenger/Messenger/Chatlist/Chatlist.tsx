@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAppSelector } from 'common/hooks/useAppSelector';
 import { authSelectors } from 'features/auth';
-import { ChatlistHeader } from '../../../../common/components/ChatlistHeader';
+import { ChatlistHeader } from 'common/components/ChatlistHeader';
 import { ChatlistCreator } from './ChatlistCreator';
 
 import { Chats } from './Chats';
